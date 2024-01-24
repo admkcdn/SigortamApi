@@ -102,8 +102,7 @@ namespace SigortamApi.Controllers
         {
             try
             {
-                string uploads = Path.Combine(_webHostEnvironment.WebRootPath, "files");
-                string filePath = Path.Combine(uploads, file.FileName);
+                string filePath = Path.Combine("files", file.FileName);
                 using (Stream fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await file.CopyToAsync(fileStream);

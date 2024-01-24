@@ -13,6 +13,8 @@ namespace Service.Users
         Task<IDataResult<User>> Get(int id);
         Task<IDataResult<List<User>>> GetAll();
         Task<IDataResult<User>> Login(string username, string password);
+        Task<IDataResult<int>> GetUserRole(int userId);
+
     }
     public class UserService : IUserService
     {
@@ -75,6 +77,18 @@ namespace Service.Users
             }
         }
 
+        public async Task<IDataResult<int>> GetUserRole(int userId)
+        {
+            try
+            {
+                var res = await _userDal.GetUserRole(userId);
+                return new SuccessDataResult<int>(res);
+            }
+            catch (Exception ex)
+            {
+                return new ErrorDataResult<int>(ex.Message);
+            }
+        }
         public async Task<IDataResult<User>> Get(int id)
         {
             try

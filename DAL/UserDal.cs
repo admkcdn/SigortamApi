@@ -13,6 +13,7 @@ namespace DAL
         Task<User> Get(int id);
         Task<List<User>> GetAll();
         Task<User> Login(string email, string password);
+        Task<int> GetUserRole(int userId);
     }
     public class UserDal : IUserDal
     {
@@ -66,6 +67,19 @@ namespace DAL
             }
         }
 
+        public async Task<int> GetUserRole(int userId)
+        {
+            try
+            {
+                var res = await _applicationContext.UserRoles.Where(x => x.UserID == userId).Select(x => x.RoleID).FirstOrDefaultAsync();
+                return res;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         public async Task<User> Get(int id)
         {
             try
