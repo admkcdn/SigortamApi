@@ -43,7 +43,7 @@ namespace Service.File
                     FileStatusID = file.FileStatusID,
                     FileTypeID = file.FileTypeID,
                     Name = file.Name,
-                    Number = file.Number,
+                    Number = Guid.NewGuid().ToString(),
                     PaymentDetailID = file.PaymentDetailID,
                     UpdateDate = file.UpdateDate,
                     UpdateUserID = file.UpdateUserID

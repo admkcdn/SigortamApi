@@ -48,7 +48,7 @@ namespace SigortamApi.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> CreateFile([FromBody] FileDto file)
+        public async Task<IActionResult> CreateFile([FromForm] FileDto file)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace SigortamApi.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateFile([FromBody] Data.Model.File file)
+        public async Task<IActionResult> UpdateFile([FromForm] Data.Model.File file)
         {
             var res = await _fileService.UpdateFile(file);
             if (res.Success)

@@ -7,6 +7,7 @@ using SigortamApi.Controllers.Base;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Utilities.Results;
 
 namespace SigortamApi.Controllers
 {
@@ -28,7 +29,7 @@ namespace SigortamApi.Controllers
         {
             var pssw = HashPassword(password);
             var res = await _userService.Login(email, pssw);
-            if (res.Data !=null)
+            if (res.Success)
             {
                 SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["AppSettings:Secret"]));
 
@@ -48,13 +49,13 @@ namespace SigortamApi.Controllers
                         signingCredentials: new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256)
                     );
 
-                return Ok(new TokenResponse
+                return Ok(new SuccessDataResult<TokenResponse>(new TokenResponse
                 {
                     Token = new JwtSecurityTokenHandler().WriteToken(jwt),
                     TokenExpireDate = dateTimeNow.Add(TimeSpan.FromDays(7))
-                });
+                }));
             }
-            return Ok(res);
+            return BadRequest(res);
         }
     }
 }

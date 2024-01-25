@@ -11,7 +11,7 @@ namespace DTOs.Files
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Number { get; set; }
+        public string? Number { get; set; }
         public int FileStatusID { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
@@ -20,7 +20,7 @@ namespace DTOs.Files
         public int PaymentDetailID { get; set; }
         public string Description { get; set; }
         public int FileTypeID { get; set; }
-        public string FilePath { get; set; }
+        public string? FilePath { get; set; }
         public IFormFile File { get; set; }
     }
 }
