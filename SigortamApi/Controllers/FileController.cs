@@ -102,12 +102,14 @@ namespace SigortamApi.Controllers
         {
             try
             {
-                string filePath = Path.Combine("files", file.FileName);
+                string uploads = Path.Combine(_webHostEnvironment.WebRootPath, "files");
+                string filePath = Path.Combine(uploads, file.FileName);
                 using (Stream fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await file.CopyToAsync(fileStream);
                 }
-                return filePath;
+                string filePathLink = Path.Combine("files", file.FileName);
+                return filePathLink;
             }
             catch (Exception ex)
             {

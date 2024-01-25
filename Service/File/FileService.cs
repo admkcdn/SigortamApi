@@ -35,8 +35,8 @@ namespace Service.File
             {
                 var mappedFile = new Data.Model.File()
                 {
-                    ID = file.ID,
-                    CreateDate = file.CreateDate,
+                    ID = (int)file.ID,
+                    CreateDate = DateTime.Now,
                     CreateUserID = file.CreateUserID,
                     Description = file.Description,
                     FilePath = file.FilePath,
@@ -44,7 +44,7 @@ namespace Service.File
                     FileTypeID = file.FileTypeID,
                     Name = file.Name,
                     Number = Guid.NewGuid().ToString(),
-                    PaymentDetailID = file.PaymentDetailID,
+                    PaymentDetailID = (int)file.PaymentDetailID,
                     UpdateDate = file.UpdateDate,
                     UpdateUserID = file.UpdateUserID
                 };

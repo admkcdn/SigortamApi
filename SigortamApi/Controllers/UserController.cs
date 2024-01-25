@@ -93,16 +93,28 @@ namespace SigortamApi.Controllers
                 return BadRequest(res);
             }
         }
+        [HttpGet("GetUserRole")]
+        public async Task<IActionResult> GetUsersRole([FromQuery] int id)
+        {
+            var res = await _userService.GetUserRole(id);
+            if (res.Success)
+            {
+                return Ok(res);
+            }
+            return BadRequest(res);
+        }
         private async Task<string> SavePhoto(IFormFile file)
         {
             try
             {
-                string filePath = Path.Combine("photos", file.FileName);
+                string uploads = Path.Combine(_webHostEnvironment.WebRootPath, "photos");
+                string filePath = Path.Combine(uploads, file.FileName);
                 using (Stream fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await file.CopyToAsync(fileStream);
                 }
-                return filePath;
+                string filePathLink = Path.Combine("photos", file.FileName);
+                return filePathLink;
             }
             catch (Exception ex)
             {

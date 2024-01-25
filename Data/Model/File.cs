@@ -4,7 +4,7 @@
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Number { get; set; }
+        public string? Number { get; set; }
         public int FileStatusID { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }

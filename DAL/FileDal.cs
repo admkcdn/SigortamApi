@@ -34,7 +34,7 @@ namespace DAL
                 var res = await _applicationContext.SaveChangesAsync();
                 if (res > 0)
                 {
-                    var addedFile = await _applicationContext.Files.FindAsync(file);
+                    var addedFile = await _applicationContext.Files.OrderByDescending(x=>x.ID).FirstAsync();
                     return addedFile;
                 }
                 return null;
